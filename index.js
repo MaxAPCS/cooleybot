@@ -1,8 +1,8 @@
 import { ApplicationCommandOptionType, ApplicationCommandType, Client, GatewayIntentBits, InteractionType } from 'discord.js';
-import config from "./config.json" assert { type: "json" };
 import fs from "fs";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildWebhooks, GatewayIntentBits.MessageContent] });
+const config = JSON.parse(fs.readFileSync("./config.json", {encoding: "utf8"}))
 
 client.on("ready", async () => {
     if (!client.user) throw new Error("Couldn't obtain a user for the client.");
