@@ -73,7 +73,7 @@ client.on("interactionCreate", async interaction => {
 })
 
 client.on("messageCreate", async message => {
-    if (message.author.id === client.user.id || Math.random() < 0.7) return;
+    if (message.author.id === client.user.id || Math.random() < 0.5) return;
     for (let [person, pdata] of Object.entries(config)) {
         for (let [category, {"triggers": triggers, "quotes": quotes}] of Object.entries(pdata)) {
             if (triggers.length === 0 || quotes.length === 0) continue
