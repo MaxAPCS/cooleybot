@@ -47,15 +47,16 @@ client.on("ready", async () => {
 client.on("interactionCreate", async interaction => {
     switch (interaction.type) {
         case InteractionType.ApplicationCommand:
+            const person = interaction.options.getString("person")
+            const category = interaction.options.getString("category")
+            if (!config[person][category])
+                return interaction.reply({"body": `Available categories for ${person}: ${Object.keys(config[person]).join(",")}`, "ephemeral": true})
             const quoteobj = {
                 "date": new Date().toLocaleDateString("en-US"),
                 "text": interaction.options.getString("quote")
             };
             if (interaction.options.getString("time", false))
                 quoteobj["time"] = new Date(`${quoteobj.date} ${interaction.options.getString("time")}`).toLocaleTimeString("en-US", {"timeStyle": "short"});
-            const person = interaction.options.getString("person")
-            const category = interaction.options.getString("category")
-            if (!config[person][category]) config[person][category] = {"triggers": [], "quotes": []}
             config[person][category].quotes.push(quoteobj)
             await fs.promises.writeFile("config.json", JSON.stringify(config, null, 2))
             await interaction.reply(`> ${quoteobj.text} [${category}]\n  - ${person}, ${quoteobj.date} ${quoteobj.time}`)
