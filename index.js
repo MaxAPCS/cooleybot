@@ -59,7 +59,7 @@ client.on("interactionCreate", async interaction => {
                 quoteobj["time"] = new Date(`${quoteobj.date} ${interaction.options.getString("time")}`).toLocaleTimeString("en-US", {"timeStyle": "short"});
             config[person][category].quotes.push(quoteobj)
             await fs.promises.writeFile("config.json", JSON.stringify(config, null, 2))
-            await interaction.reply(`> ${quoteobj.text} [${category}]\n  - ${person}, ${quoteobj.date} ${quoteobj.time}`)
+            await interaction.reply(`> ${quoteobj.text} [${category}]\n  - ${person}, ${quoteobj.date} ${quoteobj.time ?? ""}`)
         break;
         case InteractionType.ApplicationCommandAutocomplete:
             const fval = interaction.options.getFocused();
@@ -72,16 +72,21 @@ client.on("interactionCreate", async interaction => {
     }
 })
 
-client.on("messageCreate", message => {
-    if (message.author.id === client.user.id) return;
+client.on("messageCreate", async message => {
+    if (message.author.id === client.user.id || Math.random() < 0.7) return;
     for (let [person, pdata] of Object.entries(config)) {
         for (let [category, {"triggers": triggers, "quotes": quotes}] of Object.entries(pdata)) {
             if (triggers.length === 0 || quotes.length === 0) continue
-            if (!triggers.some(trigger => new RegExp(`([^\w]|^)${trigger}([^\w]|$)`, "i").test(message.content))) continue
-            const quote = quotes[Math.floor(Math.random()*quotes.length)]
-            return message.reply(quote.text
-                .replace("%u", `<@${message.author.id}>`)
-            )
+            if (!triggers.some(trigger => new RegExp(`(?:[^\w]|^)${trigger}(?:[^\w]|$)`, "i").test(message.content))) continue
+            const quote = quotes[Math.floor(Math.random()*quotes.length)].text.replace("%u", `<@${message.author.id}>`)
+            if (person === "Cooley") {
+                return message.reply(quote)
+            } else {
+                let wh = (await message.channel.fetchWebhooks()).find(wh => wh.name === person);
+                console.log(wh)
+                if (!wh) wh = await message.channel.createWebhook({"name": person})
+                return wh.send(quote)
+            }
         }
     }
 })
