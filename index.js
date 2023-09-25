@@ -50,7 +50,7 @@ client.on("interactionCreate", async interaction => {
             const person = interaction.options.getString("person")
             const category = interaction.options.getString("category")
             if (!config[person][category])
-                return interaction.reply({"body": `Available categories for ${person}: ${Object.keys(config[person]).join(",")}`, "ephemeral": true})
+                return interaction.reply({"content": `Available categories for ${person}: ${Object.keys(config[person]).join(", ")}`, "ephemeral": true})
             const quoteobj = {
                 "date": new Date().toLocaleDateString("en-US"),
                 "text": interaction.options.getString("quote")
