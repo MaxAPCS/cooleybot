@@ -1,0 +1,23 @@
+{
+  "name": "cooleybot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "run": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/MaxAPCS/cooleybot.git"
+  },
+  "author": "Max",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/MaxAPCS/cooleybot/issues"
+  },
+  "homepage": "https://github.com/MaxAPCS/cooleybot#readme",
+  "dependencies": {
+    "discord.js": "^14.13.0"
+  }
+}

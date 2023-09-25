@@ -1,0 +1,65 @@
+{
+  "Cooley": {
+    "physics": {
+      "triggers": [
+        "problem",
+        "help",
+        "=",
+        "physics",
+        "concept"
+      ],
+      "quotes": []
+    },
+    "exclamations": {
+      "triggers": [
+        "units",
+        "sigfig"
+      ],
+      "quotes": []
+    },
+    "phone": {
+      "triggers": [
+        "phone",
+        "noah"
+      ],
+      "quotes": [
+        {
+          "date": "9/22/23",
+          "text": "%u, I pray for your death."
+        }
+      ]
+    }
+  },
+  "Dickerman": {
+    "racism": {
+      "triggers": [
+        "crt",
+        "racism"
+      ],
+      "quotes": [
+        {
+          "date": "9/24/2023",
+          "text": "im racist"
+        }
+      ]
+    },
+    "sfusd": {
+      "triggers": [
+        "school board",
+        "ngss",
+        "sfusd"
+      ],
+      "quotes": []
+    },
+    "college": {
+      "triggers": [
+        "harvard",
+        "college",
+        "ivy league"
+      ],
+      "quotes": []
+    }
+  },
+  "Prothro": {
+  }
+}
