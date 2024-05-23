@@ -64,7 +64,7 @@ client.on("interactionCreate", async interaction => {
         case InteractionType.ApplicationCommandAutocomplete:
             const fval = interaction.options.getFocused();
             await interaction.respond(
-                Object.keys(config[interaction.options.getString("person")])
+                Object.keys(config[interaction.options.getString("person")] ?? {})
                 .filter(c=>c.startsWith(fval))
                 .map(choice => ({ name: choice, value: choice }))
             )
